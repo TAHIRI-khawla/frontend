@@ -1,0 +1,93 @@
+<app-dashboard-user></app-dashboard-user>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">
+            <i class="bi bi-calendar-plus me-2"></i>Nouvelle demande de congé
+          </h4>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <!-- Type de congé -->
+            <div class="mb-3">
+              <label for="type" class="form-label">Type de congé *</label>
+              <select
+                id="type"
+                class="form-select"
+                formControlName="type"
+                [ngClass]="{ 'is-invalid': form.get('type')?.invalid && form.get('type')?.touched }">
+                <option value="" disabled selected>Choisir un type...</option>
+                <option value="PAYE">Congé payé</option>
+                <option value="MALADIE">Congé maladie</option>
+                <option value="SANS_SOLDE">Congé sans solde</option>
+                <option value="MATERNITE">Congé maternité</option>
+                <option value="PATERNITE">Congé paternité</option>
+              </select>
+              <div class="invalid-feedback">
+                Veuillez sélectionner un type de congé
+              </div>
+            </div>
+
+            <!-- Dates -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="dateDebut" class="form-label">Date de début *</label>
+                <input
+                  type="date"
+                  id="dateDebut"
+                  class="form-control"
+                  formControlName="dateDebut"
+                  [ngClass]="{ 'is-invalid': form.get('dateDebut')?.invalid && form.get('dateDebut')?.touched }">
+                <div class="invalid-feedback">
+                  Veuillez sélectionner une date de début
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="dateFin" class="form-label">Date de fin *</label>
+                <input
+                  type="date"
+                  id="dateFin"
+                  class="form-control"
+                  formControlName="dateFin"
+                  [min]="form.get('dateDebut')?.value"
+                  [ngClass]="{ 'is-invalid': form.get('dateFin')?.invalid && form.get('dateFin')?.touched }">
+                <div class="invalid-feedback">
+                  Veuillez sélectionner une date de fin valide
+                </div>
+              </div>
+            </div>
+
+            <!-- Durée calculée -->
+            <div class="mb-3" *ngIf="form.get('dateDebut')?.value && form.get('dateFin')?.value">
+              <div class="alert alert-info">
+                <strong>Durée :</strong> {{ calculateDuration() }} jour(s)
+              </div>
+
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                [disabled]="form.invalid || isLoading">
+                <span *ngIf="!isLoading">
+                  <i class="bi bi-send-check me-2"></i>Envoyer la demande
+                </span>
+                <span *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Envoi en cours...
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

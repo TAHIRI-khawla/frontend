@@ -1,0 +1,105 @@
+<app-dashboard-admin></app-dashboard-admin>
+<div class="container m-lg-5">
+  <h2>Modifier l'employé</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="employeForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Informations personnelles</h4>
+
+        <div class="mb-3">
+          <label class="form-label">Nom</label>
+          <input type="text" class="form-control" formControlName="nom">
+          <div *ngIf="employeForm.get('nom')?.invalid && employeForm.get('nom')?.touched"
+               class="text-danger">
+            Le nom est requis
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Prénom</label>
+          <input type="text" class="form-control" formControlName="prenom">
+          <div *ngIf="employeForm.get('prenom')?.invalid && employeForm.get('prenom')?.touched"
+               class="text-danger">
+            Le prénom est requis
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Nom d'utilisateur</label>
+          <input type="text" class="form-control" formControlName="username" [readonly]="true">
+          <div *ngIf="employeForm.get('username')?.invalid" class="text-danger">
+            Minimum 4 caractères requis
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email">
+          <div *ngIf="employeForm.get('email')?.invalid" class="text-danger">
+            Email invalide
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h4>Informations professionnelles</h4>
+
+        <div class="mb-3">
+          <label class="form-label">Poste</label>
+          <input type="text" class="form-control" formControlName="poste">
+          <div *ngIf="employeForm.get('poste')?.invalid" class="text-danger">
+            Le poste est requis
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Département</label>
+          <input type="text" class="form-control" formControlName="departement">
+          <div *ngIf="employeForm.get('departement')?.invalid" class="text-danger">
+            Le département est requis
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Date d'embauche</label>
+          <input type="date" class="form-control" formControlName="dateEmbauche">
+          <div *ngIf="employeForm.get('dateEmbauche')?.invalid" class="text-danger">
+            La date est requise
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Salaire</label>
+          <input type="number" step="0.01" class="form-control" formControlName="salaire">
+          <div *ngIf="employeForm.get('salaire')?.invalid" class="text-danger">
+            Doit être un nombre positif
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Rôles</label>
+          <select class="form-select" multiple formControlName="selectedRoles">
+            <option *ngFor="let role of roles" [value]="role.id">
+              {{ role.name | roleName }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" class="btn btn-secondary" routerLink="/employes">
+        Annuler
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="employeForm.invalid || isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+        {{ isLoading ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

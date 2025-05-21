@@ -1,0 +1,54 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MonApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Layout -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a class="nav-link active" aria-current="page" href="#">
+              <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a class="nav-link" href="#">
+              <i class="bi bi-people"></i> Utilisateurs
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a class="nav-link" href="#">
+              <i class="bi bi-gear"></i> Paramètres
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+      <h1>Bienvenue sur le tableau de bord</h1>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
