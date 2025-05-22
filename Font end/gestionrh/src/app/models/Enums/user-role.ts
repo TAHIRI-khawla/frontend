@@ -1,4 +1,0 @@
-export enum UserRole {
-  ROLE_RESPONSABLE = 'ROLE_RESPONSABLE',
-  ROLE_EMPLOYEE = 'ROLE_EMPLOYEE'
-}
