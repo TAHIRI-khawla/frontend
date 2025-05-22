@@ -1,0 +1,34 @@
+<app-dashboard-admin></app-dashboard-admin>
+<div class="container">
+<div class="col-md-9 ms-sm-4 col-lg-10  py-4">
+  <h2>Liste des Employés</h2>
+  <a routerLink="/create" class="btn btn-primary mb-3">Nouvel Employé</a>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Poste</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let emp of employes">
+      <td>{{ emp.id }}</td>
+      <td>{{ emp.nom }}</td>
+      <td>{{ emp.prenom }}</td>
+      <td>{{ emp.email }}</td>
+      <td>{{ emp.poste }}</td>
+      <td>
+        <a [routerLink]="['/employes', emp.id]" class="btn btn-info btn-sm">Détails</a>
+        <a [routerLink]="['/update', emp.id]" class="btn btn-warning btn-sm mx-2">Modifier</a>
+        <button (click)="deleteEmploye(emp.id!)" class="btn btn-danger btn-sm">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
